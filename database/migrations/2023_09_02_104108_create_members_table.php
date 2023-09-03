@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('numbKey')->default(2);
+            $table->string('description')->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->default(\Illuminate\Support\Facades\Hash::make('123456'));
+            $table->integer('roleID')->default(4);
+            $table->string('salary')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('members');
     }
 }
